@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 
 import '../CSS/global.css'
 import '../CSS/popular.css'
@@ -48,7 +49,7 @@ function PopularMovies(props) {
                             </div>
                             <p>{mostPopular.overview}</p>
                             <div className = "row-box">
-                                <button>More Info</button>
+                                <Link to={`/movie-info/${mostPopular.id}`}><button>More Info</button></Link>
                                 <button>Similar Movies</button>
                             </div>
                         </div>
@@ -75,7 +76,7 @@ function PopularMovies(props) {
                                     </div>
                                     <p>{movie.overview}</p>
                                     <div className = "row-box">
-                                        <button>More Info</button>
+                                        <Link to={`/movie-info/${movie.id}`}><button>More Info</button></Link>
                                         <button>Similar Movies</button>
                                     </div>
                                 </div>     

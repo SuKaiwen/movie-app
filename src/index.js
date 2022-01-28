@@ -4,9 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { Routes ,Route, BrowserRouter as Router } from 'react-router-dom';
+import MovieInfo from './Pages/MovieInfo';
+
 ReactDOM.render(
+  
   <React.StrictMode>
-    <App />
+    <Router>
+      <Routes>
+        <Route path='/' element={<App/>} />
+        <Route path='/movie-info/:slug' element={<MovieInfo/>} />
+      </Routes>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
