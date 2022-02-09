@@ -89,8 +89,9 @@
 .movie-card .card-info {
     width: 60%;
     text-align: left;
-    padding: 10px;
+    padding: 15px;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .movie-card .card-info p {
@@ -114,21 +115,39 @@
     font-size: 20px;
 }
 
-.row-box {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+@media (width < 1601px) {
+    p {
+        font-size: 12px;
+    }
+
+    .movie-card h1 {
+        font-size: 16px;
+    }
+    
+    .movie-card{
+        width: 32%;
+    }
+
+    .movie-card .card-image {
+        width: 50%;
+    }
+
+    .movie-card .card-info {
+        width: 50%;
+    }
+
+    .movie-grid{
+        width: 90%;
+        padding: 0 5%;
+    }
+
+    .main-card {
+        width: 90%;
+        padding: 0 5%;
+    }
 }
 
-.row-box > *:first-child {
-    margin-left: 0px;
-}
-
-.row-box > * {
-    margin-left: 10px;
-}
-
-@media (width < 1600px) {
+@media (width < 1268px) {
     .movie-card{
         width: 47%;
     }

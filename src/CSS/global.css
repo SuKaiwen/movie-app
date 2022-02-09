@@ -10,7 +10,48 @@ button {
     padding: 10px;
     font-size: 15px;
     color: white;
-    background-color: black;
-    border: 1px solid black;
+    background-color: #00003f;
+    border: 1px solid #00003f;
     border-radius: 4px;
+}
+
+/* general structure */
+.grid {
+    width: 100%;
+    display: inline-grid;
+    grid-template-columns: repeat(2, [col-start] 1fr);
+    grid-gap: 10px;
+}
+  
+.grid-card {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.grid-card p {
+    line-height: 0;
+}
+
+.row-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.row-box > *:first-child {
+    margin-left: 0px;
+}
+
+.row-box > * {
+    margin-left: 10px;
+}
+
+/* text styles */
+.bold {
+    font-weight: bold;
+}
+
+.underline {
+    text-decoration: underline;
 }

@@ -1,0 +1,88 @@
+.page-container .movie-info-container{
+    color: #1e1e1e !important;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: calc(100vh + 400px);
+}
+
+.movie-info-col {
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    background-color: #f9f9f9;
+    padding: 50px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 400px;
+}
+
+.movie-info-col h1 {
+    font-size: 50px;
+    font-weight: 400;
+}
+
+.movie-info-col .subheading {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.movie-info-container .banner {
+    width: 100%;
+    height: 500px;
+}
+
+.movie-info-col .info {
+    width: 60%;
+}
+
+.movie-info-col .info .text-box {
+    width: 60%;
+    color: gray;
+}
+
+.movie-info-col .image {
+    width: 40%;
+}
+
+.movie-info-col .image img {
+    margin-top: 50px;
+    width: 100%;
+    object-fit: contain;
+}
+
+.movie-info-col .genre {
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: transparent;
+    color: black;
+}
+
+.movie-info-col .company-logo {
+    width: 100px;
+    height: 40px;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (width < 1268px) {
+    .movie-info-col {
+        flex-direction: column-reverse;
+    }
+
+    .movie-info-col .info {
+        width: 100%;
+    }
+
+    .movie-info-col .image {
+        display: none;
+    }
+}
+
