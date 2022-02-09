@@ -28,9 +28,6 @@ function PopularMovies(props) {
         <div>
             {popularMovies.length > 0 &&
                 <div className = "page-container">
-                    <div className = "main-title">
-                        <h1>Popular Now</h1>
-                    </div>
                     <div className = "main-card">
                         <div className = "main-image">
                             <img src = {`https://image.tmdb.org/t/p/original/${mostPopular.backdrop_path}`} alt = "" />
