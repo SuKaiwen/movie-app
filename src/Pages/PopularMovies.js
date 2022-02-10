@@ -28,7 +28,9 @@ function PopularMovies(props) {
         <div>
             {popularMovies.length > 0 &&
                 <div className = "page-container">
-                    <div className = "main-card">
+                    <div className = "main-card" style = {{
+                                                        backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 30%, rgba(18, 18, 18, 1) 100%), url(" + `https://image.tmdb.org/t/p/original/${mostPopular.backdrop_path}` + ")"
+                                                        }}>
                         <div className = "main-image">
                             <img src = {`https://image.tmdb.org/t/p/original/${mostPopular.backdrop_path}`} alt = "" />
                         </div>

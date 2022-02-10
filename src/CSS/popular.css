@@ -1,9 +1,9 @@
 .main-card {
-    width: 80%;
-    padding: 0 10%;
-    margin: 100px 0;
+    width: 100%;
+    padding: 100px 10%;
     display: flex;
     flex-direction: row;
+    box-sizing: border-box;
 }
 
 .main-title {
@@ -16,6 +16,7 @@
 
 .main-image {
     width: 60%;
+    z-index: 2;
 }
 
 .main-info {
@@ -29,6 +30,7 @@
     margin: 30px;
     box-sizing: border-box;
     border-radius: 20px;
+    z-index: 2;
 }
 
 .main-info p {
@@ -148,8 +150,7 @@
     }
 
     .main-card {
-        width: 90%;
-        padding: 0 5%;
+        padding: 5%;
     }
 }
 
