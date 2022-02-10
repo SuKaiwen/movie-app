@@ -33,16 +33,19 @@ function MovieInfo(props) {
                 <div className = "page-container">
                     <div className = "movie-info-container">
                         <div className = "banner">
-                            <img src = {`https://image.tmdb.org/t/p/original/${movieInfo.backdrop_path}`} alt = "" />
-                        </div>
-                        <div className = "movie-info-col">
-                            <div className = "info">
+                            <img src = {`https://image.tmdb.org/t/p/original/${movieInfo.backdrop_path}`} alt = "" className = "gradient"/>
+                            <div className = "title">
                                 <h1>{movieInfo.original_title}</h1>
                                 <div className = "row-box">
                                     <i class="fas fa-star fa-2x"></i>
                                     <h1>{movieInfo.vote_average}/10</h1>
                                     <p>{movieInfo.vote_count} votes</p>
                                 </div>
+                            </div>
+                        </div>
+                        <div className = "movie-info-col">
+                            <div className = "info">
+                                
                                 <h1 className = "subheading">Details</h1>
                                 <div className = "grid">
                                     <div className = "grid-card">
@@ -76,7 +79,7 @@ function MovieInfo(props) {
                                 <div className = "text-box">
                                     <p>{movieInfo.overview}</p>
                                 </div>
-                                <a href={movieInfo.homepage}><button>Visit Homepage</button></a>
+                                <a href={movieInfo.homepage}><button>Official Site</button></a>
                                 <h1 className = "subheading">Production Teams</h1>
                                 <div className = "row-box">
                                     {movieInfo.production_companies?.map((company) => {return(
