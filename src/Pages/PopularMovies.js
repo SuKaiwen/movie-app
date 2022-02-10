@@ -47,7 +47,6 @@ function PopularMovies(props) {
                             <p>{mostPopular.overview}</p>
                             <div className = "row-box">
                                 <Link to={`/movie-info/${mostPopular.id}`}><button>More Info</button></Link>
-                                <button>Similar Movies</button>
                             </div>
                         </div>
                     </div>
@@ -74,7 +73,6 @@ function PopularMovies(props) {
                                     <p>{movie.overview}</p>
                                     <div className = "row-box">
                                         <Link to={`/movie-info/${movie.id}`}><button>More Info</button></Link>
-                                        <button>Similar Movies</button>
                                     </div>
                                 </div>     
                             </div>

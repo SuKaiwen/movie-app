@@ -10,7 +10,7 @@
 .movie-info-col {
     display: flex;
     flex-direction: row;
-    width: 75%;
+    width: 80%;
     background-color: #f9f9f9;
     padding: 50px;
     box-sizing: border-box;
@@ -39,7 +39,7 @@
     top: 450px;
     left: 12.5%;
     width: 75%;
-    font-size: 30px;
+    font-size: 35px;
     color: white;
     justify-content: space-between;
 }
@@ -89,9 +89,26 @@
     object-fit: cover;
 }
 
+.company-container {
+    display: block;
+    flex-wrap: wrap;
+}
+
+@media (width < 1650px) {
+    .movie-info-container .banner {
+        height: 400px;
+    }
+
+    .movie-info-container .title {
+        top: 300px;
+        font-size: 25px;
+    }
+}
+
 @media (width < 1268px) {
     .movie-info-col {
         flex-direction: column-reverse;
+        width: 85%;
     }
 
     .movie-info-col .info {
@@ -100,6 +117,31 @@
 
     .movie-info-col .image {
         display: none;
+    }
+
+    .movie-info-container .title {
+        top: 300px;
+        font-size: 22px;
+        width: 85%;
+        left: 7.5%;
+    }
+}
+
+@media (width < 768px) {
+    .movie-info-col {
+        width: 90%;
+    }
+
+    .movie-info-col .info .text-box {
+        width: 100%;
+        color: gray;
+    }
+
+    .movie-info-container .title {
+        top: 375px;
+        font-size: 12px;
+        width: 90%;
+        left: 5%;
     }
 }
 

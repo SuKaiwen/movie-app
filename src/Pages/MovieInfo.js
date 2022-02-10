@@ -45,7 +45,6 @@ function MovieInfo(props) {
                         </div>
                         <div className = "movie-info-col">
                             <div className = "info">
-                                
                                 <h1 className = "subheading">Details</h1>
                                 <div className = "grid">
                                     <div className = "grid-card">
@@ -83,7 +82,7 @@ function MovieInfo(props) {
                                 <h1 className = "subheading">Production Teams</h1>
                                 <div className = "row-box">
                                     {movieInfo.production_companies?.map((company) => {return(
-                                        <div>
+                                        <div className = "company-container">
                                             <img className = "company-logo" src = {`https://image.tmdb.org/t/p/original/${company.logo_path}`} alt = "" />
                                             <p>{company.name}</p>
                                         </div>

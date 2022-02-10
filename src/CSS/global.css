@@ -3,16 +3,23 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #00003f;
+    background-color: #121212;
 }
 
 button {
     padding: 10px;
     font-size: 15px;
     color: white;
-    background-color: #00003f;
-    border: 1px solid #00003f;
+    background-color: #121212;
+    border: 1px solid #121212;
     border-radius: 4px;
+}
+
+@media (width < 768px) {
+    button {
+        padding: 8px;
+        font-size: 12px;
+    }
 }
 
 /* general structure */
@@ -30,13 +37,14 @@ button {
 }
 
 .grid-card p {
-    line-height: 0;
+    line-height: 1;
 }
 
 .row-box {
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .row-box > *:first-child {
