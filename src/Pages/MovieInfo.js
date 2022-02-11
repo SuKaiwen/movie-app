@@ -5,12 +5,13 @@ import '../CSS/movieInfo.css';
 import '../CSS/global.css';
 
 function MovieInfo(props) {
+    
     const { slug } = useParams();
-    console.log(slug);
-
     const [movieInfo, setMovieInfo] = useState([]);
     const [load, setLoad] = useState(false);
 
+    // Get movie info API 
+    // Uses the movie ID which is contained in the slug
     useEffect(() => {
         async function fetchMovieInfo(){
             let response = await fetch(`https://api.themoviedb.org/3/movie/${slug}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
