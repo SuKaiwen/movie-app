@@ -83,6 +83,11 @@
     height: 40px;
 }
 
+.movie-info-col .actor-image {
+    width: 100px;
+    height: 140px;
+}
+
 .banner img {
     width: 100%;
     height: 100%;
@@ -92,6 +97,11 @@
 .company-container {
     display: block;
     flex-wrap: wrap;
+    width: 19%;
+}
+
+.movie-info-col .row-box {
+    align-items:flex-start;
 }
 
 @media (width < 1650px) {
@@ -130,6 +140,7 @@
 @media (width < 768px) {
     .movie-info-col {
         width: 90%;
+        padding: 15px;
     }
 
     .movie-info-col .info .text-box {
@@ -142,6 +153,10 @@
         font-size: 12px;
         width: 90%;
         left: 5%;
+    }
+
+    .company-container {
+        width: 46%;
     }
 }
 

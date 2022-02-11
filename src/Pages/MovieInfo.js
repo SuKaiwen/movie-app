@@ -5,9 +5,10 @@ import '../CSS/movieInfo.css';
 import '../CSS/global.css';
 
 function MovieInfo(props) {
-    
+
     const { slug } = useParams();
     const [movieInfo, setMovieInfo] = useState([]);
+    const [credits, setCredits] = useState([]);
     const [load, setLoad] = useState(false);
 
     // Get movie info API 
@@ -25,6 +26,22 @@ function MovieInfo(props) {
         return () => {
             setLoad(false);
             setMovieInfo([]);    
+        };
+    }, []);
+
+    // Get movie credits API
+    useEffect(() => {
+        async function fetchCredits(){
+            let response = await fetch(`https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
+            response = await response.json();
+            setCredits(response.cast.slice(0, 5));
+        }
+        fetchCredits();
+        setLoad(true);
+
+        return () => {
+            setLoad(false);
+            setCredits([]);    
         };
     }, []);
 
@@ -80,6 +97,16 @@ function MovieInfo(props) {
                                     <p>{movieInfo.overview}</p>
                                 </div>
                                 <a href={movieInfo.homepage}><button>Official Site</button></a>
+                                <h1 className = "subheading">Cast</h1>
+                                <div className = "row-box">
+                                    {credits?.map((person) => {return(
+                                        <div className = "company-container">
+                                            <img className = "actor-image" src = {`https://image.tmdb.org/t/p/original/${person.profile_path}`} alt = "" />
+                                            <p>{person.name}</p>
+                                            <p>{person.character}</p>
+                                        </div>
+                                    )})}
+                                </div>
                                 <h1 className = "subheading">Production Teams</h1>
                                 <div className = "row-box">
                                     {movieInfo.production_companies?.map((company) => {return(

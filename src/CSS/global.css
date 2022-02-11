@@ -43,16 +43,16 @@ button {
 .row-box {
     display: flex;
     flex-direction: row;
-    align-items: center;
     flex-wrap: wrap;
+    align-items: center;
 }
 
-.row-box > *:first-child {
-    margin-left: 0px;
+.row-box > *:not(last-child) {
+    margin-right: 10px;
 }
 
 .row-box > * {
-    margin-left: 10px;
+    margin-left: 0;
 }
 
 /* text styles */
