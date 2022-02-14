@@ -14,15 +14,18 @@ function MovieInfo(props) {
     // Get movie info API 
     // Uses the movie ID which is contained in the slug
     useEffect(() => {
-        async function fetchMovieInfo(){
-            let response = await fetch(`https://api.themoviedb.org/3/movie/${slug}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
-            response = await response.json();
-            console.log(response);
-            setMovieInfo(response);
+        try {
+            async function fetchMovieInfo(){
+                let response = await fetch(`https://api.themoviedb.org/3/movie/${slug}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
+                response = await response.json();
+                setMovieInfo(response);
+            }
+            fetchMovieInfo();
+            setLoad(true);
+        } catch (error) {
+            setLoad(false);
         }
-        fetchMovieInfo();
-        setLoad(true);
-
+        
         return () => {
             setLoad(false);
             setMovieInfo([]);    
@@ -31,14 +34,18 @@ function MovieInfo(props) {
 
     // Get movie credits API
     useEffect(() => {
-        async function fetchCredits(){
-            let response = await fetch(`https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
-            response = await response.json();
-            setCredits(response.cast.slice(0, 5));
+        try {
+            async function fetchCredits(){
+                let response = await fetch(`https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
+                response = await response.json();
+                setCredits(response.cast.slice(0, 5));
+            }
+            fetchCredits();
+            setLoad(true);
+        } catch (error) {
+            setLoad(false);
         }
-        fetchCredits();
-        setLoad(true);
-
+        
         return () => {
             setLoad(false);
             setCredits([]);    
@@ -47,7 +54,7 @@ function MovieInfo(props) {
 
     return (
         <div>
-            {load && 
+            {load ? 
                 <div className = "page-container">
                     <div className = "movie-info-container">
                         <div className = "banner">
@@ -124,6 +131,11 @@ function MovieInfo(props) {
                         </div> 
                     </div>
                 </div>
+            : <div className = "page-container">
+                <div className = "main-title">
+                    <h1>Woops... Something went wrong!</h1>
+                </div>
+            </div>
             }
         </div>
     );

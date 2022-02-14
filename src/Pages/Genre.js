@@ -9,7 +9,7 @@ function Genre(props) {
     const [genre, setGenre] = useState([]);
     const [load, setLoad] = useState(false);
 
-    // Get list of Genres to get the genre names
+    // Get list of Genres by id to get the genre names
     useEffect(() => {
         async function fetchGenres(){
             try {
@@ -34,14 +34,13 @@ function Genre(props) {
         };
     }, []);
 
-    // Get movie list from genre API
+    // Get movie list for a specific genre
     // Uses the genre ID which is contained in the slug
     useEffect(() => {
         async function fetchGenreMovies(){
             try {
                 let response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=${slug}`);
                 response = await response.json();
-                console.log(response.results);
                 setMovies(response.results);
                 setLoad(true);
             }catch(error){
@@ -91,7 +90,7 @@ function Genre(props) {
                 </div>
             : <div className = "page-container">
                     <div className = "main-title">
-                        <h1>Woops! Invalid Genre ID</h1>
+                        <h1>Woops... Something went wrong!</h1>
                     </div>
                 </div>
             }

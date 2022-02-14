@@ -9,33 +9,17 @@ function PopularMovies(props) {
     const [popularMovies, setPopularMovies] = useState([]);
     const [mostPopular, setMostPopular] = useState([]);
 
-    const [searchedMovies, setSearchedMovies] = useState([]);
-
     // Get popular movies API
     useEffect(() => {
         async function fetchPopularMovies(){
             let response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
             response = await response.json();
-            console.log(response);
             let results = response.results;
             setMostPopular(results.shift());
             setPopularMovies(results);
         }
 
         fetchPopularMovies();
-    }, []);
-
-    // Search a movie
-    useEffect(() => {
-        async function searchMovies(){
-            let response = await fetch(`https://api.themoviedb.org/3/search/movie?query=Avengers&api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&include_adult=false`);
-            response = await response.json();
-            console.log(response);
-            let results = response.results;
-            setSearchedMovies(results);
-        }
-
-        searchMovies();
     }, []);
 
     return (

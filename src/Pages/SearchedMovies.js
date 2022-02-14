@@ -19,22 +19,28 @@ function SearchedMovies(props) {
 
     // Search a movie
     useEffect(() => {
-        async function searchMovies(){
-            let response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${keyword}&api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&include_adult=false`);
-            response = await response.json();
-            let results = response.results;
-            for(var x = 0; x < results.length; x++){
-                if(results[x].backdrop_path === null){
-                    results.splice(x, 1);
-                    x--;
-                }
-            }
-            console.log(results);
-            setMovies(results);
-            setLoad(true);
-        }
+        try{
+            async function searchMovies(){
+                let response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${keyword}&api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&include_adult=false`);
+                response = await response.json();
+                let results = response.results;
 
-        searchMovies();
+                // Filter out invalid responses
+                // Sometimes the result would have a null image
+                for(var x = 0; x < results.length; x++){
+                    if(results[x].backdrop_path === null){
+                        results.splice(x, 1);
+                        x--;
+                    }
+                }
+                setMovies(results);
+                setLoad(true);
+            }
+    
+            searchMovies();
+        }catch(error){
+            setLoad(false);
+        }
 
         return () => {
             setLoad(false);
