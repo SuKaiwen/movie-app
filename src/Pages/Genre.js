@@ -9,7 +9,7 @@ function Genre(props) {
     const [genre, setGenre] = useState([]);
     const [load, setLoad] = useState(false);
 
-    // Get list of Genres
+    // Get list of Genres to get the genre names
     useEffect(() => {
         async function fetchGenres(){
             try {
