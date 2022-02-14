@@ -5,15 +5,15 @@ function SearchedMovies(props) {
 
     const [keyword, setKeyword] = useState("");
     
-    if(keyword == ""){
+    useEffect(() => {
         // Get the query string...
         const params = new Proxy(new URLSearchParams(window.location.search), {
             get: (searchParams, prop) => searchParams.get(prop),
         });
         // Get the value of "keyword" in eg "https://example.com/?keyword=some_value"
         setKeyword(params.keyword); // "some_value"
-    }
-
+    }, []);
+    
     const [movies, setMovies] = useState([]);
     const [load, setLoad] = useState(false);
 
@@ -27,12 +27,7 @@ function SearchedMovies(props) {
 
                 // Filter out invalid responses
                 // Sometimes the result would have a null image
-                for(var x = 0; x < results.length; x++){
-                    if(results[x].backdrop_path === null){
-                        results.splice(x, 1);
-                        x--;
-                    }
-                }
+                results = results.filter(x => x.backdrop_path !== null);
                 setMovies(results);
                 setLoad(true);
             }

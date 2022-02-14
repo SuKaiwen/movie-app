@@ -1,30 +1,39 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
-import '../CSS/global.css'
-import '../CSS/popular.css'
-
 function PopularMovies(props) {
 
     const [popularMovies, setPopularMovies] = useState([]);
     const [mostPopular, setMostPopular] = useState([]);
+    const [load, setLoad] = useState([]);
 
     // Get popular movies API
     useEffect(() => {
-        async function fetchPopularMovies(){
-            let response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
-            response = await response.json();
-            let results = response.results;
-            setMostPopular(results.shift());
-            setPopularMovies(results);
+        try {
+            async function fetchPopularMovies(){
+                let response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
+                response = await response.json();
+                let results = response.results;
+                setMostPopular(results.shift());
+                setPopularMovies(results);
+                setLoad(true);
+            }
+    
+            fetchPopularMovies();
+        }catch(error){
+            setLoad(false);
         }
 
-        fetchPopularMovies();
+        return () => {
+            setLoad(false);
+            setMostPopular([]);
+            setPopularMovies([]);    
+        };
     }, []);
 
     return (
         <div>
-            {popularMovies.length > 0 &&
+            {load ?
                 <div className = "page-container">
                     <div className = "main-card" style = {{
                                                         backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 30%, rgba(18, 18, 18, 1) 100%), url(" + `https://image.tmdb.org/t/p/original/${mostPopular.backdrop_path}` + ")"
@@ -78,8 +87,12 @@ function PopularMovies(props) {
                             </div>
                         ))}
                     </div>
-                    
                 </div>
+            : <div className = "page-container">
+                <div className = "main-title">
+                    <h1>Woops... Something went wrong!</h1>
+                </div>
+            </div>
             }
         </div>
     );

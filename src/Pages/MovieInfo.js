@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { useParams } from "react-router-dom";
 
-import '../CSS/movieInfo.css';
-import '../CSS/global.css';
-
 function MovieInfo(props) {
 
     const { slug } = useParams();
+
     const [movieInfo, setMovieInfo] = useState([]);
+    const [subInfo, setSubInfo] = useState([]);
     const [credits, setCredits] = useState([]);
     const [load, setLoad] = useState(false);
 
@@ -19,6 +18,32 @@ function MovieInfo(props) {
                 let response = await fetch(`https://api.themoviedb.org/3/movie/${slug}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
                 response = await response.json();
                 setMovieInfo(response);
+                setSubInfo([
+                    {
+                        name: "Release Date",
+                        value: response.release_date
+                    }, 
+                    {
+                        name: "Language",
+                        value: response.original_language
+                    }, 
+                    {
+                        name: "Runtime",
+                        value: response.runtime, 
+                    }, 
+                    {
+                        name: "Tagline",
+                        value: response.tagline 
+                    }, 
+                    {
+                        name: "Budget $",
+                        value: response.budget 
+                    }, 
+                    {
+                        name: "Revenue",
+                        value: response.revenue
+                    }
+                ]);
             }
             fetchMovieInfo();
             setLoad(true);
@@ -39,9 +64,9 @@ function MovieInfo(props) {
                 let response = await fetch(`https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
                 response = await response.json();
                 setCredits(response.cast.slice(0, 5));
+                setLoad(true);
             }
             fetchCredits();
-            setLoad(true);
         } catch (error) {
             setLoad(false);
         }
@@ -72,33 +97,16 @@ function MovieInfo(props) {
                             <div className = "info">
                                 <h1 className = "subheading">Details</h1>
                                 <div className = "grid">
-                                    <div className = "grid-card">
-                                        <p className = "bold">Release Date</p>
-                                        <p>{movieInfo.release_date}</p>
-                                    </div>
-                                    <div className = "grid-card">
-                                        <p className = "bold">Language</p>
-                                        <p>{movieInfo.original_language}</p>
-                                    </div>
-                                    <div className = "grid-card">
-                                        <p className = "bold">Duration</p>
-                                        <p>{movieInfo.runtime} min</p>
-                                    </div>
-                                    <div className = "grid-card">
-                                        <p className = "bold">Tagline</p>
-                                        <p>{movieInfo.tagline}</p>
-                                    </div>
-                                    <div className = "grid-card">
-                                        <p className = "bold">Budget</p>
-                                        <p>${movieInfo.budget}</p>
-                                    </div>
-                                    <div className = "grid-card">
-                                        <p className = "bold">Revenue</p>
-                                        <p>${movieInfo.revenue}</p>
-                                    </div>
+                                    {subInfo.map(info => {return (
+                                        <div className = "grid-card">
+                                            <p className = "bold">{info.name}</p>
+                                            <p>{info.value}</p>
+                                        </div>
+                                    )})
+                                    }
                                 </div>
                                 <h1 className = "subheading">Genres</h1>
-                                {movieInfo.genres?.map((genre) => {return(<button className = "genre">{genre.name}</button>)})}
+                                {movieInfo.genres?.map((genre) => <button className = "genre">{genre.name}</button>)}
                                 <h1 className = "subheading">Overview</h1>
                                 <div className = "text-box">
                                     <p>{movieInfo.overview}</p>
