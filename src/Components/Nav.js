@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react';
 
-import '../CSS/nav.css';
-
 function Nav(props) {
 
     const [genres, setGenres] = useState([]);
@@ -38,16 +36,22 @@ function Nav(props) {
                 </li>
                 <li>
                     <a href = "/"><button>Home</button></a>
-                    <a>
+                    <div>
                         <div class="dropdown">
                             <button class="dropbtn">Genres</button>
-                            <div class="dropdown-content">
-                                {genres.map(genre => {return (
-                                    <a href={`/genre/${genre.id}`}>{genre.name}</a>
-                                )})}
+                            {load ?
+                                <div class="dropdown-content">
+                                    {genres.map(genre => {return (
+                                        <a href={`/genre/${genre.id}`}>{genre.name}</a>
+                                    )})}
+                                </div>
+                            : <div class="dropdown-content">
+                                <p>Failed to load</p>
                             </div>
+                            }
+                            
                         </div>
-                    </a>
+                    </div>
                 </li>
             </ul>
         </div>
