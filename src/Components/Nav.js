@@ -32,6 +32,9 @@ function Nav(props) {
             <ul>
                 <li>
                     <a href = "/"><button><i class="fas fa-database"></i> MovieDB</button></a>
+                    <form method="get" action="/search/movies">
+                        <input className = "search-bar" type="text" placeholder="Search for a movie..." title="Type in a name" name="keyword"></input>
+                    </form>
                 </li>
                 <li>
                     <a href = "/"><button>Home</button></a>

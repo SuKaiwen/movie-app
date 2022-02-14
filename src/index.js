@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import { Routes ,Route, BrowserRouter as Router } from 'react-router-dom';
 import MovieInfo from './Pages/MovieInfo';
 import Genre from './Pages/Genre';
+import SearchedMovies from './Pages/SearchedMovies';
 
 ReactDOM.render(
   
@@ -18,6 +19,7 @@ ReactDOM.render(
         <Route path='/' element={<App/>} />
         <Route path='/movie-info/:slug' element={<MovieInfo/>} />
         <Route path='/genre/:slug' element={<Genre/>} />
+        <Route path='/search/movies' element={<SearchedMovies/>} />
       </Routes>
     </Router>
   </React.StrictMode>,

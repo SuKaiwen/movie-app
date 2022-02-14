@@ -22,6 +22,8 @@
 }
 
 .nav li {
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 }
@@ -65,6 +67,13 @@
 
 .nav .dropdown:hover .dropbtn {background-color: black;}
 
+.nav .search-bar {
+    padding: 10px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+}
+
 @media (width < 1268px) {
     .nav ul{
         width: 85%;
@@ -84,5 +93,14 @@
 
     .nav .dropdown-content {
         height: 90vh;
+    }
+
+    .nav .search-bar {
+        padding: 8px;
+        border-radius: 20px;
+        font-size: 12px;
+        width: 80%;
+        border: none;
+        outline: none;
     }
 }

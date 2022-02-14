@@ -152,6 +152,11 @@
     .main-card {
         padding: 5%;
     }
+
+    .main-title {
+        width: 90%;
+        padding: 0 5%;
+    }
 }
 
 @media (width < 1268px) {
