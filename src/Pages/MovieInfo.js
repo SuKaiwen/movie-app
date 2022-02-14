@@ -16,37 +16,41 @@ function MovieInfo(props) {
         try {
             async function fetchMovieInfo(){
                 let response = await fetch(`https://api.themoviedb.org/3/movie/${slug}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
-                response = await response.json();
-                setMovieInfo(response);
-                setSubInfo([
-                    {
-                        name: "Release Date",
-                        value: response.release_date
-                    }, 
-                    {
-                        name: "Language",
-                        value: response.original_language
-                    }, 
-                    {
-                        name: "Runtime",
-                        value: response.runtime, 
-                    }, 
-                    {
-                        name: "Tagline",
-                        value: response.tagline 
-                    }, 
-                    {
-                        name: "Budget $",
-                        value: response.budget 
-                    }, 
-                    {
-                        name: "Revenue",
-                        value: response.revenue
-                    }
-                ]);
+                if(response.status != 200){
+                    console.log(response.status);
+                }else{
+                    response = await response.json();
+                    setMovieInfo(response);
+                    setSubInfo([
+                        {
+                            name: "Release Date",
+                            value: response.release_date
+                        }, 
+                        {
+                            name: "Language",
+                            value: response.original_language
+                        }, 
+                        {
+                            name: "Runtime",
+                            value: response.runtime + " min", 
+                        }, 
+                        {
+                            name: "Tagline",
+                            value: response.tagline 
+                        }, 
+                        {
+                            name: "Budget",
+                            value: "$" + response.budget 
+                        }, 
+                        {
+                            name: "Revenue",
+                            value: "$" + response.revenue
+                        }
+                    ]);
+                    setLoad(true);
+                }
             }
             fetchMovieInfo();
-            setLoad(true);
         } catch (error) {
             setLoad(false);
         }
@@ -62,9 +66,14 @@ function MovieInfo(props) {
         try {
             async function fetchCredits(){
                 let response = await fetch(`https://api.themoviedb.org/3/movie/${slug}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
-                response = await response.json();
-                setCredits(response.cast.slice(0, 5));
-                setLoad(true);
+                if(response.status != 200){
+                    console.log(response.status);
+                }else{
+                    response = await response.json();
+                    setCredits(response.cast.slice(0, 5));
+                    setLoad(true);
+                }
+                
             }
             fetchCredits();
         } catch (error) {

@@ -14,14 +14,19 @@ function Genre(props) {
         async function fetchGenres(){
             try {
                 let response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
-                response = await response.json();
-                for(var x in response.genres){
-                    if(slug === response.genres[x].id.toString()){
-                        
-                        setGenre(response.genres[x].name);
+                if(response.status !== 200){
+                    console.log(response.status);
+                    setLoad(false);
+                }else{
+                    response = await response.json();
+                    for(var x in response.genres){
+                        if(slug === response.genres[x].id.toString()){
+                            
+                            setGenre(response.genres[x].name);
+                        }
                     }
+                    setLoad(true);
                 }
-                setLoad(true);
             }catch(error){
                 setLoad(false);
             }
@@ -40,9 +45,13 @@ function Genre(props) {
         async function fetchGenreMovies(){
             try {
                 let response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&with_genres=${slug}`);
-                response = await response.json();
-                setMovies(response.results);
-                setLoad(true);
+                if(response.status !== 200){
+                    console.log(response.status);
+                }else{
+                    response = await response.json();
+                    setMovies(response.results);
+                    setLoad(true);
+                }
             }catch(error){
                 setLoad(false);
             }   

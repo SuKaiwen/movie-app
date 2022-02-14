@@ -10,9 +10,13 @@ function Nav(props) {
         async function fetchGenres(){
             try {
                 let response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
-                response = await response.json();
-                setGenres(response.genres);
-                setLoad(true);
+                if(response.status != 200){
+                    console.log(response.status);
+                }else{
+                    response = await response.json();
+                    setGenres(response.genres);
+                    setLoad(true);
+                }
             }catch(error){
                 setLoad(false);
             }

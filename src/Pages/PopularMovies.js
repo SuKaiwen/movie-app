@@ -5,18 +5,24 @@ function PopularMovies(props) {
 
     const [popularMovies, setPopularMovies] = useState([]);
     const [mostPopular, setMostPopular] = useState([]);
-    const [load, setLoad] = useState([]);
+    const [load, setLoad] = useState(false);
 
     // Get popular movies API
     useEffect(() => {
         try {
             async function fetchPopularMovies(){
                 let response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
-                response = await response.json();
-                let results = response.results;
-                setMostPopular(results.shift());
-                setPopularMovies(results);
-                setLoad(true);
+                if(response.status != 200){
+                    console.log(response.status);
+                    setLoad(false);
+                }else{
+                    response = await response.json();
+                    let results = response.results;
+                    setMostPopular(results.shift());
+                    setPopularMovies(results);
+                    setLoad(true);
+                }
+                
             }
     
             fetchPopularMovies();
