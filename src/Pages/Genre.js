@@ -7,7 +7,7 @@ function Genre(props) {
 
     const [movies, setMovies] = useState([]);
     const [genre, setGenre] = useState([]);
-    const [load, setLoad] = useState(false);
+    const [load, setLoad] = useState(true);
 
     // Get list of Genres by id to get the genre names
     useEffect(() => {

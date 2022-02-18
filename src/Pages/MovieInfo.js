@@ -16,8 +16,9 @@ function MovieInfo(props) {
         try {
             async function fetchMovieInfo(){
                 let response = await fetch(`https://api.themoviedb.org/3/movie/${slug}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
-                if(response.status != 200){
+                if(response.status !== 200){
                     console.log(response.status);
+                    setLoad(false);
                 }else{
                     response = await response.json();
                     setMovieInfo(response);

@@ -4,25 +4,24 @@ import { Link } from 'react-router-dom';
 function SearchedMovies(props) {
 
     const [keyword, setKeyword] = useState("");
-    
-    useEffect(() => {
-        // Get the query string...
-        const params = new Proxy(new URLSearchParams(window.location.search), {
-            get: (searchParams, prop) => searchParams.get(prop),
-        });
-        // Get the value of "keyword" in eg "https://example.com/?keyword=some_value"
-        setKeyword(params.keyword); // "some_value"
-    }, []);
-    
     const [movies, setMovies] = useState([]);
-    const [load, setLoad] = useState(false);
+    const [load, setLoad] = useState(true);
 
     // Search a movie
     useEffect(() => {
         try{
+            console.log("here");
             async function searchMovies(){
-                let response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${keyword}&api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&include_adult=false`);
-                if(response.status != 200){
+                // Get the query string...
+                const params = new Proxy(new URLSearchParams(window.location.search), {
+                    get: (searchParams, prop) => searchParams.get(prop),
+                });
+                // Get the value of "keyword" in eg "https://example.com/?keyword=some_value"
+                let key = params.keyword;
+                setKeyword(key); // "some_value"
+
+                let response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${key}&api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&include_adult=false`);
+                if(response.status !== 200){
                     console.log(response.status);
                     setLoad(false);
                 }else{
@@ -32,7 +31,6 @@ function SearchedMovies(props) {
                     // Filter out invalid responses
                     // Sometimes the result would have a null image
                     results = results.filter(x => x.backdrop_path !== null);
-
                     setMovies(results);
                     setLoad(true);
                 }   
@@ -46,7 +44,7 @@ function SearchedMovies(props) {
             setLoad(false);
             setMovies([]);    
         };
-    }, [keyword]);
+    }, []);
 
     return (
         <div>
