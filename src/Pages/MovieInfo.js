@@ -8,7 +8,7 @@ function MovieInfo(props) {
     const [movieInfo, setMovieInfo] = useState([]);
     const [subInfo, setSubInfo] = useState([]);
     const [credits, setCredits] = useState([]);
-    const [load, setLoad] = useState(false);
+    const [load, setLoad] = useState(true);
 
     // Get movie info API 
     // Uses the movie ID which is contained in the slug

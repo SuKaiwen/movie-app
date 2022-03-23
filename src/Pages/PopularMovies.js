@@ -40,7 +40,9 @@ function PopularMovies(props) {
             {load ?
                 <div className = "page-container">
                     <div className = "main-card" style = {{
-                                                        backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 30%, rgba(18, 18, 18, 1) 100%), url(" + `https://image.tmdb.org/t/p/original/${mostPopular.backdrop_path}` + ")"
+                                                        backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 30%, rgba(18, 18, 18, 1) 100%), url(" + `https://image.tmdb.org/t/p/original/${mostPopular.backdrop_path}` + ")",
+                                                        backgroundRepeat: "no-repeat",
+                                                        backgroundSize: "100% 100%"
                                                         }}>
                         <div className = "main-image">
                             <img src = {`https://image.tmdb.org/t/p/original/${mostPopular.backdrop_path}`} alt = "" />
