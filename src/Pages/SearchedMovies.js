@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
+
+import PopularMoviesGrid from '../Components/PopularMoviesGrid';
 
 function SearchedMovies(props) {
 
@@ -53,31 +54,9 @@ function SearchedMovies(props) {
                     <div className = "main-title">
                         <h1>Results for keyword: {keyword}</h1>
                     </div>
-                    <div className = "movie-grid">
-                        {movies.map(movie => (
-                            <div className = "movie-card">
-                                <div className = "card-image">
-                                    <img src={`https://image.tmdb.org/t/p/w185/${movie.poster_path}`} alt = ""/>
-                                </div>   
-                                <div className = "card-info">
-                                    <h1>{movie.original_title}</h1>
-                                    <div className = "row-box">
-                                        <i class="fas fa-star fa-2x"></i>
-                                        <h1>{movie.vote_average}/10</h1>
-                                        <p>{movie.vote_count} votes</p>
-                                    </div>
-                                    <div className = "row-box">
-                                        <p>{movie.release_date}</p>
-                                        <p>{movie.original_language}</p>
-                                    </div>
-                                    <p>{movie.overview}</p>
-                                    <div className = "row-box">
-                                        <Link to={`/movie-info/${movie.id}`}><button>More Info</button></Link>
-                                    </div>
-                                </div>     
-                            </div>
-                        ))}
-                    </div>
+                    <PopularMoviesGrid 
+                        popularMovies = {movies}
+                    />
                 </div>
             : <div className = "page-container">
                     <div className = "main-title">

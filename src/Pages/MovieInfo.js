@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { useParams } from "react-router-dom";
 
+import MovieInfoBanner from '../Components/MovieInfoBanner';
+import MovieInfoContent from '../Components/MovieInfoContent';
+
 function MovieInfo(props) {
 
     const { slug } = useParams();
@@ -92,61 +95,21 @@ function MovieInfo(props) {
             {load ? 
                 <div className = "page-container">
                     <div className = "movie-info-container">
-                        <div className = "banner">
-                            <img src = {`https://image.tmdb.org/t/p/original/${movieInfo.backdrop_path}`} alt = "" className = "gradient"/>
-                            <div className = "title">
-                                <h1>{movieInfo.original_title}</h1>
-                                <div className = "row-box">
-                                    <i class="fas fa-star fa-2x"></i>
-                                    <h1>{movieInfo.vote_average}/10</h1>
-                                    <p>{movieInfo.vote_count} votes</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className = "movie-info-col">
-                            <div className = "info">
-                                <h1 className = "subheading">Details</h1>
-                                <div className = "grid">
-                                    {subInfo.map(info => {return (
-                                        <div className = "grid-card">
-                                            <p className = "bold">{info.name}</p>
-                                            <p>{info.value}</p>
-                                        </div>
-                                    )})
-                                    }
-                                </div>
-                                <h1 className = "subheading">Genres</h1>
-                                {movieInfo.genres?.map((genre) => <button className = "genre">{genre.name}</button>)}
-                                <h1 className = "subheading">Overview</h1>
-                                <div className = "text-box">
-                                    <p>{movieInfo.overview}</p>
-                                </div>
-                                <a href={movieInfo.homepage}><button>Official Site</button></a>
-                                <h1 className = "subheading">Cast</h1>
-                                <div className = "row-box">
-                                    {credits?.map((person) => {return(
-                                        <div className = "company-container">
-                                            <img className = "actor-image" src = {`https://image.tmdb.org/t/p/original/${person.profile_path}`} alt = "" />
-                                            <p>{person.name}</p>
-                                            <p>{person.character}</p>
-                                        </div>
-                                    )})}
-                                </div>
-                                <h1 className = "subheading">Production Teams</h1>
-                                <div className = "row-box">
-                                    {movieInfo.production_companies?.map((company) => {return(
-                                        <div className = "company-container">
-                                            <img className = "company-logo" src = {`https://image.tmdb.org/t/p/original/${company.logo_path}`} alt = "" />
-                                            <p>{company.name}</p>
-                                        </div>
-                                    )})}
-                                </div>
-                                <a href="/"><button><i class="fas fa-arrow-left"></i> Back to Home</button></a>
-                            </div>
-                            <div className = "image">
-                                <img src = {`https://image.tmdb.org/t/p/original/${movieInfo.poster_path}`} alt = "" />
-                            </div>
-                        </div> 
+                        <MovieInfoBanner
+                            backdrop = {movieInfo.backdrop_path}
+                            title = {movieInfo.title}
+                            vote_count = {movieInfo.vote_count}
+                            vote_average = {movieInfo.vote_average}
+                        />
+                        <MovieInfoContent
+                            subInfo = {subInfo}
+                            genres = {movieInfo.genres}
+                            overview = {movieInfo.overview}
+                            homepage = {movieInfo.homepage}
+                            credits = {credits}
+                            production_companies = {movieInfo.production_companies}
+                            poster_path = {movieInfo.poster_path}
+                        />
                     </div>
                 </div>
             : <div className = "page-container">
